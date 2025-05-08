@@ -1,0 +1,16 @@
+{
+  "name": "sql-ninjas",
+  "version": "1.0.0",
+  "description": "ninja training sql",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jesper-kun",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "express": "^5.1.0",
+    "pg": "^8.15.6"
+  }
+}
