@@ -25,3 +25,51 @@ exports.createMission = async (req, res) => {
     res.status(500).send("Error adding mission");
   }
 };
+
+exports.getOneMission = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query("SELECT * FROM missions WHERE id = $1");
+    if (results.row.length === 0) {
+      return res.status(404).send("Mission not found!");
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error fetching mission!");
+  }
+};
+
+exports.updateMission = async (req, res) => {
+  const { id } = req.params;
+  const { warrior_id, title, difficulty, reward } = req.body;
+  try {
+    const result = await pool.query(
+      "UPDATE missions SET warrior_id = $1, title = $2, difficulty = $3, reward = $4"[
+        (warrior_id, title, difficulty, reward)
+      ]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).send("Mission not found!");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed updating missions!");
+  }
+};
+
+exports.deleteMission = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      "DELETE FROM missions WHERE id = $1 RETURNING *",
+      [id]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).send("Could not find mission.");
+    }
+    res.send("Mission deleted!");
+  } catch (err) {
+    res.status(500).send("Failed to delete mission!");
+  }
+};
