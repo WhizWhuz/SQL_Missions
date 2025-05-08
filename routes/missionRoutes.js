@@ -3,11 +3,11 @@ const router = express.Router();
 const missionController = require("../controllers/missionsControllers");
 const validateMission = require("../middlewares/validateMissions");
 
-router.use(validateMission);
-
 router
   .route("/")
   .get(missionController.getMissions)
-  .post(missionController.createMission);
+  .post(validateMission, missionController.createMission);
+
+router.route("/:id").put(validateMission, missionController.updateMission);
 
 module.exports = router;

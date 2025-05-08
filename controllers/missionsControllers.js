@@ -1,3 +1,5 @@
+const pool = require("../config/db");
+
 exports.getMissions = async (req, res) => {
   try {
     const result = await pool.query(`
@@ -8,7 +10,7 @@ exports.getMissions = async (req, res) => {
     res.json(result.rows);
   } catch (err) {
     console.error(err);
-    res.status(500).send("error fetching missions");
+    next();
   }
 };
 
@@ -22,7 +24,7 @@ exports.createMission = async (req, res) => {
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error adding mission");
+    next();
   }
 };
 
@@ -36,7 +38,7 @@ exports.getOneMission = async (req, res) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Error fetching mission!");
+    next();
   }
 };
 
@@ -54,7 +56,7 @@ exports.updateMission = async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500).send("Failed updating missions!");
+    next();
   }
 };
 
@@ -70,6 +72,6 @@ exports.deleteMission = async (req, res) => {
     }
     res.send("Mission deleted!");
   } catch (err) {
-    res.status(500).send("Failed to delete mission!");
+    next();
   }
 };

@@ -1,3 +1,5 @@
+const pool = require("../config/db");
+
 exports.getWarriors = async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM warriors");
