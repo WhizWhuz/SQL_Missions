@@ -1,0 +1,17 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "Dojo of Jesper",
+      "database": "dojo_of_jesper",
+      "username": "postgres"
+    }
+  ],
+  "sql-formatter.dialect": "postgresql",
+  "sql-formatter.upperKeywords": true,
+  "sql-formatter.tabWidth": 2
+}
