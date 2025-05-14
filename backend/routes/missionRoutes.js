@@ -8,6 +8,10 @@ router
   .get(missionController.getMissions)
   .post(validateMission, missionController.createMission);
 
-router.route("/:id").put(validateMission, missionController.updateMission);
+router
+  .route("/:id")
+  .get(missionController.getOneMission)
+  .put(validateMission, missionController.updateMission)
+  .delete(missionController.deleteMission);
 
 module.exports = router;
